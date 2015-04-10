@@ -1,0 +1,3 @@
+# v2ex每日签到脚本
+
+修改UserName为用户名,PassWord为密码之后直接运行脚本即可
