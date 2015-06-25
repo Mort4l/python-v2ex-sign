@@ -9,7 +9,7 @@ class v2ex:
             "next":"/",
             "once":re.findall('value="(\d+)" name="once"',self.s.get("http://www.v2ex.com/signin").text)[0]
             }
-        signin=self.s.post("http://www.v2ex.com/signin",data=payload,headers={'Referer': 'httpss://www.v2ex.com/signin'})
+        signin=self.s.post("http://www.v2ex.com/signin",data=payload,headers={'Referer': 'http://www.v2ex.com/signin'})
         if signin.text.find("signout")==-1:
             print self.u+" 登录失败！"
         else:
@@ -20,8 +20,8 @@ class v2ex:
             print self.u+" 已领取过奖励!"
         else:
             try:
-                daily=re.findall('(/mission/daily/redeem\?once=\d+)',self.s.get("https://www.v2ex.com/mission/daily").text)[0]
-                a=self.s.get("http://www.v2ex.com"+daily,headers={"Referer":"https://www.v2ex.com/mission/daily"})
+                daily=re.findall('(/mission/daily/redeem\?once=\d+)',self.s.get("http://www.v2ex.com/mission/daily").text)[0]
+                a=self.s.get("http://www.v2ex.com"+daily,headers={"Referer":"http://www.v2ex.com/mission/daily"})
                 print self.u+" 签到成功！"
             except:
                 print self.u+" 签到失败！"
@@ -29,4 +29,4 @@ class v2ex:
         self.u=u
         self.p=p
         self.login()
-sign1=v2ex("uername","password")
+v2ex("username","password")
