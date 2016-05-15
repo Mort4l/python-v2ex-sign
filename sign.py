@@ -3,11 +3,12 @@ import requests,re
 class v2ex:
     s=requests.Session()
     def login(self):
+        loginpage = self.s.get("http://www.v2ex.com/signin").text
         payload={
-            "u":self.u,
-            "p":self.p,
+            re.findall('type="text" class="sl" name="([a-f0-9]{64,64})"', loginpage)[0]:self.u,
+            re.findall('type="password" class="sl" name="([a-f0-9]{64,64})"', loginpage)[0]:self.p,
             "next":"/",
-            "once":re.findall('value="(\d+)" name="once"',self.s.get("http://www.v2ex.com/signin").text)[0]
+            "once":re.findall('value="(\d+)" name="once"',loginpage)[0]
             }
         signin=self.s.post("http://www.v2ex.com/signin",data=payload,headers={'Referer': 'http://www.v2ex.com/signin'})
         if signin.text.find("signout")==-1:
